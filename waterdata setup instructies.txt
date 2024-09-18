@@ -1,0 +1,28 @@
+# R installatie op de raspberry:
+sudo apt update
+sudo apt install r-base r-base-dev
+sudo apt install build-essential  libxml2-dev libssl-dev libcurl4-openssl-dev # libcurl4-gnutls-dev
+sudo R -q -e "install.packages(c('curl'))"
+sudo R -q -e "install.packages('plotly')"
+
+# directory
+mkdir waterdata
+cd waterdata
+cp waterdata.tar .
+tar -xvzf waterdata.tar
+
+#edit waterdata_cron.sh in de laatste regel voor upload van de test.html naar de te gebruiken webserver, eventueel eerst elementen tussen de <body> tag eruit filteren
+
+# Eenmalig data vanaf begin periode downloaden (mocht rpi >2 dagen niet geupdate hebben, handmatig opnieuw doen om missende data te herstellen) 
+sh downloadGrondwaterpeildata.sh
+sh downloadNeerslagdata.sh
+
+# verifieer of het werkt
+sh waterdata_cron.sh
+# test.html & lib folder moet nu ontstaan
+
+# cronjob, draaien om 3 uur s'nachts, waterpeil data update 12 uur 's middags, knmi regendata snachts voor de vorige dag.
+crontab -e
+0 3 * * * PATH/waterdata_cron.sh
+
+
