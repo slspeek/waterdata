@@ -3,8 +3,8 @@ set -e
 
 function ellitrack_login() {
     curl -L --cookie-jar cookies.txt \
-         --data-urlencode "username=$EL_USERNAME" \
-         --data-urlencode "password=$EL_PASSWORD" \
+         --data-urlencode "username=$ET_USERNAME" \
+         --data-urlencode "password=$ET_PASSWORD" \
          --data "submit=Log+in" https://www.ellitrack.nl/auth/login &> /dev/null
 }
 

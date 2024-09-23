@@ -35,4 +35,4 @@ fig <- fig %>%
         ),
         yaxis = list(title = "grondwaterstand (cm onder maaiveld)", color = "rgb(144, 168, 120)", range = list(-400, -150)), yaxis2 = list(title = "dagneerslag (cm)", overlaying = "y", side = "right", range = list(250, 0), color = "rgb(39, 144, 176)")
     )
-htmltools::save_html(fig, file = paste(getwd(), "test.html", sep = "/"))
+htmltools::save_html(fig, file = paste(getwd(), "website", "test.html", sep = "/"))
