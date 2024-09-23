@@ -1,10 +1,10 @@
 library(plotly)
-data <- read.csv("/home/tobias/waterdata/grondwaterpeildata.csv", header = TRUE, sep = "\t")
+data <- read.csv(paste(getwd(), "grondwaterpeildata.csv", sep = "/"), header = TRUE, sep = "\t")
 data$Datum <- as.POSIXct(data$Datum, format = "%Y-%m-%d %H:%M:%S")
 data$Waterstand.gecorrigeerd <- replace(data$Waterstand.gecorrigeerd, data$Waterstand.gecorrigeerd > 1500, NA)
 data$Waterstand.gecorrigeerd <- data$Waterstand.gecorrigeerd - 1460.7
 
-regendata <- read.csv("/home/tobias/waterdata/neerslaggr.csv", header = TRUE)
+regendata <- read.csv(paste(getwd(), "neerslaggr.csv", sep = "/"), header = TRUE)
 regendata$YYYYMMDD <- as.character(regendata$YYYYMMDD)
 regendata$YYYYMMDD <- as.POSIXct(regendata$YYYYMMDD, format = "%Y%m%d")
 regendata$RH <- as.numeric(regendata$RH)
@@ -35,4 +35,4 @@ fig <- fig %>%
         ),
         yaxis = list(title = "grondwaterstand (cm onder maaiveld)", color = "rgb(144, 168, 120)", range = list(-400, -150)), yaxis2 = list(title = "dagneerslag (cm)", overlaying = "y", side = "right", range = list(250, 0), color = "rgb(39, 144, 176)")
     )
-htmltools::save_html(fig, file = "/home/tobias/waterdata/test.html")
+htmltools::save_html(fig, file = paste(getwd(), "test.html", sep = "/"))

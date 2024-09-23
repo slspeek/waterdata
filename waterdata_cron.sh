@@ -18,7 +18,7 @@ curl -d 'start='$TWODAGO'&end='$DATE'&vars=RH&stns=350' https://www.daggegevens.
 merge_data neerslaggr.csv neerslaggrtemp.csv
 
 ## Maak grafiek
-Rscript grafiek.R
+docker run -u $(id -u):$(id -g)  --rm -v$PWD:/project -w/project slspeek/r-plotly Rscript grafiek.R
 
 ## upload
 ## upload command ##
