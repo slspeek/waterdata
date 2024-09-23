@@ -18,12 +18,12 @@ setup: prepare
 .ONESHELL:
 test: setup
 	cd $(WORKING_DIR)
-	bash waterdata_cron.sh $$PWD
+	bash waterdata_cron.sh $${PWD}
 
 .ONESHELL:
 view: test
 	cd $(WORKING_DIR)
-	x-www-browser website/test.html
+	x-www-browser website/index.html
 
 lintr:
 	R -q -e "library(lintr);lint(filename = 'grafiek.R')"
