@@ -18,7 +18,7 @@ setup: prepare
 .ONESHELL:
 test: setup
 	cd $(WORKING_DIR)
-	bash waterdata_cron.sh $${PWD}
+	bash waterdata_cron.sh $(WORKING_DIR)
 
 .ONESHELL:
 view: test
