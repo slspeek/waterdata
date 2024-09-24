@@ -3,15 +3,13 @@ set -e
 
 . ./utilities.sh
 
-DATE=$(date +%d-%m-%Y)
-START_DATE="24-09-2022"
+TODAY=$1
 
-download_waterdata $START_DATE $DATE >  grondwaterpeildata.csv
+download_waterdata $START_DATE $TODAY >  grondwaterpeildata.csv
 
-DATE=$(date +%d-%m-%Y)
-TWODAGO=$(date --date="2 days ago" +%d-%m-%Y)
+TWODAGO=$(twodays_before $TODAY)
 
-download_waterdata $TWODAGO $DATE >  grondwaterpeildatatemp.csv
+download_waterdata $TWODAGO $TODAY >  grondwaterpeildatatemp.csv
 
 merge_data grondwaterpeildata.csv grondwaterpeildatatemp.csv
 

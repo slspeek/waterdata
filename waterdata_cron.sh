@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 set -e
-. ./utilities.sh
+source ./utilities.sh
 
 ## Update grondwater peil data
 cd ${1}
 
-DATE=$(date +%d-%m-%Y)
-TWODAGO=$(date --date="2 days ago" +%d-%m-%Y)
-download_waterdata $TWODAGO $DATE > grondwaterpeildatatemp.csv
+TODAY_ISO=${2}
+TODAY=$TODAY_ISO
+TWODAGO=$(twodays_before $TODAY)
+
+download_waterdata $TWODAGO $TODAY > grondwaterpeildatatemp.csv
 merge_data grondwaterpeildata.csv grondwaterpeildatatemp.csv
 
-## update neerslag data
-curl -d 'start='$TWODAGO'&end='$DATE'&vars=RH&stns=350' https://www.daggegevens.knmi.nl/klimatologie/daggegevens > neerslaggrtemp.csv
-# tail -n+10 $PTH/neerslaggrtemp.csv >> $PTH/neerslaggr.csv
-# { head -n1 $PTH/neerslaggr.csv; tail -n+2 $PTH/neerslaggr.csv | sort -u;} > $PTH/file.tmp && mv $PTH/file.tmp $PTH/neerslaggr.csv
+download_neerslagdata $TWODAGO $TODAY > neerslaggrtemp.csv
 merge_data neerslaggr.csv neerslaggrtemp.csv
 
 mkdir -p website
