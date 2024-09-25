@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 ELLITRACK_DATE_FORMAT=%d-%m-%Y
 KNMI_DATE_FORMAT=%Y%m%d

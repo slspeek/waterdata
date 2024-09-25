@@ -1,15 +1,17 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
-. ./utilities.sh
+source ./utilities.sh
 
 TODAY=$1
 
 download_waterdata $START_DATE $TODAY >  grondwaterpeildata.csv
+# cp grondwaterpeildata.csv  grondwaterpeildata.csv.before
 
-TWODAGO=$(twodays_before $TODAY)
+# #FIXME Why is this done? Test to see difference
+# TWODAGO=$(twodays_before $TODAY)
 
-download_waterdata $TWODAGO $TODAY >  grondwaterpeildatatemp.csv
+# download_waterdata $TWODAGO $TODAY >  grondwaterpeildatatemp.csv
 
-merge_data grondwaterpeildata.csv grondwaterpeildatatemp.csv
+# merge_data grondwaterpeildata.csv grondwaterpeildatatemp.csv
 

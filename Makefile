@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 WORKING_DIR=$(shell pwd)/build
 TODAY=20240923
+WATERDATA_HOME=$(shell pwd)
 
 default: clean view
 
@@ -14,15 +15,15 @@ prepare:
 .ONESHELL:
 setup: prepare
 	cd $(WORKING_DIR)
-	source env.sh
-	bash downloadGrondwaterpeildata.sh $(TODAY)
-	bash downloadNeerslagdata.sh $(TODAY)
+	# export PATH=$$PATH:$(WORKING_DIR)
+	export WATERDATA_HOME=$(WATERDATA_HOME)
+	./waterdata_setup.sh $(TODAY)
 
 .ONESHELL:
 test: setup
 	cd $(WORKING_DIR)
 	# source env.sh
-	bash waterdata_cron.sh $(WORKING_DIR) $(TODAY)
+	./waterdata_cron.sh $(WORKING_DIR) $(TODAY)
 
 .ONESHELL:
 view: test
