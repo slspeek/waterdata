@@ -26,7 +26,7 @@ function download_waterdata() {
     TO_DATE=$(ellitrack_date $2)
     curl --cookie cookies.txt \
          --cookie-jar cookies.txt \
-         "https://www.ellitrack.nl/multitracker/downloadexport/trackerid/23688/\
+         "https://www.ellitrack.nl/multitracker/downloadexport/trackerid/${ET_TRACKERID}/\
 type/period/n/0/periodfrom/${FROM_DATE}%2012%3A00/\
 periodto/${TO_DATE}%2012%3A00/periodtype/date"
 }
