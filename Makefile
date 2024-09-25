@@ -9,7 +9,7 @@ clean:
 
 prepare: 
 	mkdir -p build
-	cp *.sh *.R build
+	cp bin/*.sh bin/*.R build
 
 .ONESHELL:
 setup: prepare
@@ -20,8 +20,8 @@ setup: prepare
 
 .ONESHELL:
 test: setup
-	source env.sh
 	cd $(WORKING_DIR)
+	# source env.sh
 	bash waterdata_cron.sh $(WORKING_DIR) $(TODAY)
 
 .ONESHELL:

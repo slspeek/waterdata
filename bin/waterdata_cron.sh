@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+source ./env.sh
 source ./utilities.sh
 
 ## Update grondwater peil data
