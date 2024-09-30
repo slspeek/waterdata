@@ -8,7 +8,7 @@ default: clean view
 clean:
 	rm -rfv build
 
-prepare: 
+prepare: lintr
 	mkdir -p build
 	cp bin/*.sh bin/*.R build
 
@@ -31,5 +31,5 @@ view: test
 	x-www-browser website/index.html
 
 lintr:
-	R -q -e "library(lintr);lint(filename = 'grafiek.R')"
+	Rscript -e "errors <- lintr::lint('bin/grafiek.R'); print(errors); quit(save = 'no', status = length(errors))"
 
