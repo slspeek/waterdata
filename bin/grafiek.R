@@ -100,7 +100,7 @@ fig <- fig %>%
     yaxis = list(
       title = "grondwaterstand (cm onder maaiveld)",
       color = "rgb(144, 168, 120)",
-      range = list(-400, -150)
+      range = list(-400, -100)
     ),
     yaxis2 = list(
       title = "dagneerslag (mm)",
