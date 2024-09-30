@@ -52,7 +52,6 @@ fig <- fig %>%
   layout(
     showlegend = FALSE,
     margin = list(r = 50),
-    title = "Grondwaterstand Spoorpark",
     xaxis = list(
       rangeselector =
         list(buttons = list(
@@ -96,7 +95,7 @@ fig <- fig %>%
             label = "Alles",
             step = "all"
           )
-        )), rangeslider = list(visible = TRUE)
+        ))
     ),
     yaxis = list(
       title = "grondwaterstand (cm onder maaiveld)",
@@ -104,10 +103,10 @@ fig <- fig %>%
       range = list(-400, -150)
     ),
     yaxis2 = list(
-      title = "dagneerslag (cm)",
+      title = "dagneerslag (mm)",
       overlaying = "y",
       side = "right",
-      range = list(250, 0),
+      range = list(120, 0),
       color = "rgb(39, 144, 176)"
     )
   )
