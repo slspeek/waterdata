@@ -31,5 +31,6 @@ view: test
 	x-www-browser website/index.html
 
 lintr:
-	Rscript -e "errors <- lintr::lint('bin/grafiek.R'); print(errors); quit(save = 'no', status = length(errors))"
+	docker run -u $(id -u):$(id -g)  --rm -v$$PWD:/project -w/project slspeek/lintr \
+		Rscript -e "errors <- lintr::lint('bin/grafiek.R'); print(errors); quit(save = 'no', status = length(errors))"
 
