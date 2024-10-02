@@ -3,7 +3,7 @@ name: Cronjob
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '55,05 * * * *'
+    - cron:  '55,08,15 * * * *'
 
 jobs:
 
@@ -12,5 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Message
-        run: echo Test job
+      - name: Update grondwaterpeil data
+        run: make update_grondwaterpeildata
+      - run: git config --name ${{ secrets.USERNAME }}
+      - run: git config --email ${{ secrets.EMAIL }}
+      - run: git add resource/archive/grondwaterpeildata.csv
+      - run: git commit -m "Updated grondwaterpeildata"
+      - run: git push

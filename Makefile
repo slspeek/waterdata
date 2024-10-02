@@ -20,6 +20,11 @@ setup: prepare
 	./waterdata_setup.sh $(TODAY)
 
 .ONESHELL:
+update_grondwaterpeildata: prepare
+	cd $(WORKING_DIR)
+	./update_grondwaterpeildata.sh $(TODAY) $(WATERDATA_HOME)/resource/archive/grondwaterdata/grondwaterpeildata.csv
+
+.ONESHELL:
 test: setup
 	cd $(WORKING_DIR)
 	# source env.sh
