@@ -3,12 +3,14 @@ name: Cronjob
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '*/10 * * * *'
+    - cron:  '55,05 * * * *'
 
 jobs:
 
   testjob:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Message
         run: echo Test job
