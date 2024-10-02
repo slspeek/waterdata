@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
-source ./env.sh
-source ./utilities.sh
+source ./waterdata_env.sh
+source ./waterdata_utilities.sh
 
 ## Update grondwater peil data
 cd ${1}
