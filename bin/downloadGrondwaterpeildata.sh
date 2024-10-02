@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-source ./utilities.sh
+source ./waterdata_utilities.sh
 
 TODAY=$1
 
