@@ -1,12 +1,12 @@
-name: Cronjob
+name: Update grondwaterpeildata
 
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '40 * * * *'
+    - cron:  '50 * * * *'
 
 jobs:
-  testjob:
+  update_grondwaterpeildata:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -15,7 +15,7 @@ jobs:
         env:
             ET_USERNAME: ${{ secrets.ET_USERNAME }}
             ET_PASSWORD: ${{ secrets.ET_PASSWORD }}
-        run: make update_grondwaterpeildata
+        run: make update_grondwaterpeildata TODAY=$(date +%Y%m%d)
       - run: git config --name ${{ secrets.USERNAME }}
       - run: git config --email ${{ secrets.EMAIL }}
       - run: git add resource/archive/grondwaterpeildata.csv
