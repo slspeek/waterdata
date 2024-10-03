@@ -16,8 +16,8 @@ jobs:
             ET_USERNAME: ${{ secrets.ET_USERNAME }}
             ET_PASSWORD: ${{ secrets.ET_PASSWORD }}
         run: make update_grondwaterpeildata TODAY=$(date +%Y%m%d)
-      - run: git config --name ${{ secrets.USERNAME }}
-      - run: git config --email ${{ secrets.EMAIL }}
+      - run: git config --global user.name ${{ secrets.USERNAME }}
+      - run: git config --global user.email ${{ secrets.EMAIL }}
       - run: git add resource/archive/grondwaterpeildata.csv
       - run: git commit -m "Updated grondwaterpeildata"
       - run: git push
