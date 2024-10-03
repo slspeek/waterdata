@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-
+source ./waterdata_env.sh
 source ./waterdata_utilities.sh
 
 TODAY=$1

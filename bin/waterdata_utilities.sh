@@ -23,11 +23,13 @@ function download_waterdata() {
     ellitrack_login
     FROM_DATE=$(ellitrack_date $1)
     TO_DATE=$(ellitrack_date $2)
-    curl --cookie cookies.txt \
-         --cookie-jar cookies.txt \
-         "https://www.ellitrack.nl/multitracker/downloadexport/trackerid/${ET_TRACKERID}/\
+    ET_URL="https://www.ellitrack.nl/multitracker/downloadexport/trackerid/${ET_TRACKERID}/\
 type/period/n/0/periodfrom/${FROM_DATE}%2012%3A00/\
 periodto/${TO_DATE}%2012%3A00/periodtype/date"
+    # echo $ET_URL > et_url.txt
+    curl --cookie cookies.txt \
+         --cookie-jar cookies.txt \
+         $ET_URL
 }
 
 function knmi_date() {
