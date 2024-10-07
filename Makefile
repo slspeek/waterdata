@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 WORKING_DIR=$(shell pwd)/build
-TODAY=20240923
+TODAY=$(shell date +%Y%m%d)
 WATERDATA_HOME=$(shell pwd)
 
 default: clean view
@@ -8,16 +8,10 @@ default: clean view
 clean:
 	rm -rfv build
 
-prepare: lintr
+prepare:
 	mkdir -p build
 	cp bin/*.sh bin/*.R build
 
-.ONESHELL:
-setup: prepare
-	cd $(WORKING_DIR)
-	# export PATH=$$PATH:$(WORKING_DIR)
-	export WATERDATA_HOME=$(WATERDATA_HOME)
-	./waterdata_setup.sh $(TODAY)
 
 .ONESHELL:
 update_grondwaterpeildata: prepare
@@ -25,13 +19,13 @@ update_grondwaterpeildata: prepare
 	./update_grondwaterpeildata.sh $(TODAY) $(WATERDATA_HOME)/resource/archive/grondwaterdata/grondwaterpeildata.csv
 
 .ONESHELL:
-test: setup
+graph: prepare lintr
 	cd $(WORKING_DIR)
-	# source env.sh
+	export WATERDATA_HOME=$(WATERDATA_HOME)
 	./waterdata_cron.sh $(WORKING_DIR) $(TODAY)
 
 .ONESHELL:
-view: test
+view: graph
 	cd $(WORKING_DIR)
 	x-www-browser website/index.html
 

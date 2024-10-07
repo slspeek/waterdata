@@ -3,22 +3,12 @@ set -e
 source ./waterdata_env.sh
 source ./waterdata_utilities.sh
 
-## Update grondwater peil data
 cd ${1}
+TODAY=${2}
 
-TODAY_ISO=${2}
-TODAY=$TODAY_ISO
-TWODAGO=$(twodays_before $TODAY)
+download_neerslagdata $START_DATE $TODAY > neerslaggr.csv
 
-download_waterdata $TWODAGO $TODAY > grondwaterpeildatatemp.csv
-merge_data grondwaterpeildata.csv grondwaterpeildatatemp.csv
+# Needed for docker
+cp $WATERDATA_HOME/resource/archive/grondwaterdata/grondwaterpeildata.csv .
 
-download_neerslagdata $TWODAGO $TODAY > neerslaggrtemp.csv
-merge_data neerslaggr.csv neerslaggrtemp.csv
-
-mkdir -p website
-## Maak grafiek
-docker run -u $(id -u):$(id -g)  --rm -v$PWD:/project -w/project slspeek/r-plotly Rscript grafiek.R
-
-## upload
-## upload command ##
+./draw_graph.sh grondwaterpeildata.csv neerslaggr.csv

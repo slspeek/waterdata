@@ -2,8 +2,8 @@ name: Update grondwaterpeildata
 
 on:
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '33 * * * *'
+    # Run at 3:33 am every day
+    - cron:  '33 3 * * *'
 
 jobs:
   update_grondwaterpeildata:

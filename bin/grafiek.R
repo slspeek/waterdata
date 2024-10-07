@@ -1,10 +1,11 @@
 library(plotly)
+
+args <- commandArgs(trailingOnly = TRUE)
+grondwaterdata <- args[1]
+neerslagdata <- args[2]
+
 data <- read.csv(
-  paste(
-    getwd(),
-    "grondwaterpeildata.csv",
-    sep = "/"
-  ),
+  grondwaterdata,
   header = TRUE,
   sep = "\t"
 )
@@ -18,11 +19,7 @@ data$Waterstand.gecorrigeerd <-
 data$Waterstand.gecorrigeerd <- data$Waterstand.gecorrigeerd - 1460.7
 
 regendata <- read.csv(
-  paste(
-    getwd(),
-    "neerslaggr.csv",
-    sep = "/"
-  ),
+  neerslagdata,
   header = TRUE
 )
 regendata$YYYYMMDD <- as.character(regendata$YYYYMMDD)
