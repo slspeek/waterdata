@@ -26,10 +26,19 @@ function download_waterdata() {
     ET_URL="https://www.ellitrack.nl/multitracker/downloadexport/trackerid/${ET_TRACKERID}/\
 type/period/n/0/periodfrom/${FROM_DATE}%2012%3A00/\
 periodto/${TO_DATE}%2012%3A00/periodtype/date"
-    # echo $ET_URL > et_url.txt
-    curl --cookie cookies.txt \
+    #echo $ET_URL > et_url.txt
+    TOTAL_OUTPUT=$(mktemp)
+    curl --silent --cookie cookies.txt \
          --cookie-jar cookies.txt \
-         $ET_URL
+         $ET_URL -w '\n%{content_type}\n' > $TOTAL_OUTPUT
+    CONTENT_TYPE="$(tail -n 1 $TOTAL_OUTPUT)"
+    if [ "$CONTENT_TYPE" != "application/vnd.ms-excel" ]
+    then
+      echo download_waterdata failed for $ET_URL 1>&2
+      echo content-type was $CONTENT_TYPE 1>&2
+      return 3
+    fi
+    head -n -2 $TOTAL_OUTPUT
 }
 
 function knmi_date() {
