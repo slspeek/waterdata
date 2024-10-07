@@ -3,7 +3,7 @@ name: Update grondwaterpeildata
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '45 * * * *'
+    - cron:  '05 * * * *'
 
 jobs:
   update_grondwaterpeildata:
@@ -22,3 +22,4 @@ jobs:
       - run: git commit -m "Updated grondwaterpeildata"
       - run: git tag -a $(date +%Y%m%d) -m $(date +%Y%m%d)
       - run: git push
+      - run: git push origin tag $(date +%Y%m%d)
