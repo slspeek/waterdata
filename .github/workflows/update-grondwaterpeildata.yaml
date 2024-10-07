@@ -3,7 +3,7 @@ name: Update grondwaterpeildata
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '05 * * * *'
+    - cron:  '33 * * * *'
 
 jobs:
   update_grondwaterpeildata:
@@ -11,15 +11,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
       - name: Update grondwaterpeil data
         env:
             ET_USERNAME: ${{ secrets.ET_USERNAME }}
             ET_PASSWORD: ${{ secrets.ET_PASSWORD }}
         run: make update_grondwaterpeildata TODAY=$(date +%Y%m%d)
-      - run: git config --global user.name ${{ secrets.USERNAME }}
-      - run: git config --global user.email ${{ secrets.EMAIL }}
-      - run: git add resource/archive/grondwaterdata/grondwaterpeildata.csv
-      - run: git commit -m "Updated grondwaterpeildata"
-      - run: git tag -a $(date +%Y%m%d) -m $(date +%Y%m%d)
-      - run: git push
-      - run: git push origin tag $(date +%Y%m%d)
+      - run: |
+          export TODAY=$(date +%Y%m%d)
+          git config --global user.name ${{ secrets.USERNAME }}
+          git config --global user.email ${{ secrets.EMAIL }}
+          git add resource/archive/grondwaterdata/grondwaterpeildata.csv
+          git commit -m "Updated grondwaterpeildata" || echo "No changes to commit"
+          git tag -a $TODAY -m $TODAY
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT }}
+          branch: ${{ github.ref }}
