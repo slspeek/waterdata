@@ -8,6 +8,10 @@ default: clean view
 clean:
 	rm -rfv build
 
+
+install_dependencies:
+	sudo apt-get install html2text
+
 prepare:
 	mkdir -p build
 	cp bin/*.sh bin/*.R build
