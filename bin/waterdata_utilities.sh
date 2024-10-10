@@ -34,11 +34,13 @@ periodto/${TO_DATE}%2012%3A00/periodtype/date"
     CONTENT_TYPE="$(tail -n 1 $TOTAL_OUTPUT)"
     if [ "$CONTENT_TYPE" != "application/vnd.ms-excel" ]
     then
-      echo download_waterdata failed for $ET_URL 1>&2
-      echo content-type was $CONTENT_TYPE 1>&2
-      echo
-      head -n -2 $TOTAL_OUTPUT|html2text
-      echo   
+      {
+        echo download_waterdata failed for $ET_URL;
+        echo content-type was $CONTENT_TYPE;
+        echo;
+        head -n -2 $TOTAL_OUTPUT|html2text;
+        echo
+      }|cat - 1>&2
       return 3
     fi
     head -n -2 $TOTAL_OUTPUT
