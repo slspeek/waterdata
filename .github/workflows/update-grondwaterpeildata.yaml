@@ -2,8 +2,8 @@ name: Update grondwaterpeildata
 
 on:
   schedule:
-    # Run at 1:13 pm every day
-    - cron:  '13 13 * * *'
+    # Run at 1:13 pm CET DST every day
+    - cron:  '11 13 * * *'
 
 jobs:
   update_grondwaterpeildata:
