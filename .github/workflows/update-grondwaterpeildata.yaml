@@ -27,7 +27,7 @@ jobs:
           git config --global push.followTags true
           git add resource/archive/grondwaterdata/grondwaterpeildata.csv
           git commit -m "Updated grondwaterpeildata" || echo "No changes to commit"
-          git tag -a $TODAY -m $TODAY
+          bin/create-tag.sh -p
       - name: Push
         uses: ad-m/github-push-action@master
         with:
