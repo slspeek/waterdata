@@ -6,8 +6,7 @@ neerslagdata <- args[2]
 
 data <- read.csv(
   grondwaterdata,
-  header = TRUE,
-  sep = "\t"
+  header = TRUE
 )
 data$Datum <- as.POSIXct(data$Datum, format = "%Y-%m-%d %H:%M:%S")
 data$Waterstand.gecorrigeerd <-

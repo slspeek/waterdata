@@ -14,7 +14,7 @@ install_dependencies:
 
 prepare:
 	mkdir -p build
-	cp bin/*.sh bin/*.R build
+	cp bin/*.py bin/*.sh bin/*.R build
 
 
 .ONESHELL:

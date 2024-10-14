@@ -43,7 +43,7 @@ periodto/${TO_DATE}%2012%3A00/periodtype/date"
       }|cat - 1>&2
       return 3
     fi
-    head -n -2 $TOTAL_OUTPUT
+    head -n -2 $TOTAL_OUTPUT|./tsv2csv.py
 }
 
 function knmi_date() {
@@ -66,6 +66,6 @@ function merge_data() {
     tail -n+2 $2 >> $TEMPFILE
     {
         head -n1 $TEMPFILE; 
-        tail -n+2 $TEMPFILE | sort -u;
+        tail -n+2 $TEMPFILE | sort --unique --reverse;
     } > $1
 }
