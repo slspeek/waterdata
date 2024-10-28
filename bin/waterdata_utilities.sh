@@ -3,10 +3,6 @@
 ELLITRACK_DATE_FORMAT=%d-%m-%Y
 KNMI_DATE_FORMAT=%Y%m%d
 
-function twodays_before() {
-    date --date="$1 -2 days" +%Y%m%d
-}
-
 function ellitrack_login() {
     curl --location \
          --cookie-jar cookies.txt \
